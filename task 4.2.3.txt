@@ -1,0 +1,42 @@
+Use the rest countries API url -> https://restcountries.eu/rest/v2/all and display all the country flags in console
+
+
+
+var req = new XMLHttpRequest();
+req.open("GET",'https://restcountries.eu/rest/v2/all',true);
+req.send();
+req.onload = () =>{
+    var data = JSON.parse(req.response);
+    if(req.status===200){
+        for(var i in data){
+            document.write("<p>"+data[i]['name']+":      "+ data[i]['flag']+"</p>")
+        }
+    }
+    else{
+        document.write(`error ${req.status} ${req.statusText}`)
+    }
+}
+
+
+
+Use the same rest countries and print all countries name, region, sub region and population
+
+
+var req = new XMLHttpRequest();
+req.open("GET",'https://restcountries.eu/rest/v2/all',true);
+req.send();
+req.onload = () =>{
+    var data = JSON.parse(req.response);
+    if(req.status===200){
+        for(var i in data){
+            document.write("<h3>"+data[i]['name']+"</h3>")
+            for(var j in data[i]){
+                document.write("<p>"+j+": "+data[i][j]+'</p>')
+            }
+            document.write("<br> <hr> <br>")
+        }
+    }
+    else{
+        document.write(`error ${req.status} ${req.statusText}`)
+    }
+}
